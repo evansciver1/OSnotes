@@ -10,3 +10,10 @@ Powershell:
   - $profile.allusersallhosts applies to everyone; persistence using this looks for highest precdent
   - ($profile | get-member -membertype noteproperty).name | foreach-object { if ((test-path $PROFILE.$_) -eq $true) { write-host "$PROFILE.$_" -foregroundcolor green -nonewline ; write-host "exists }}
     getss user profiles and confirms they exist
+  - Remoting:
+    - requires windows remote management to be running [winrm]
+    - get-item wsman:\localhost\client\trustedhosts shows what computers are trusted to remote in; by default only allows one addition
+    - using quotes around what you want to add w/get-item allows multiple additions i.e. ... -value "10.20.30.40,not_kremlin.ru" will add both
+    - 'invoke-command' also works to temporarily remote in i.e. 'Invoke-Command -ComputerName File-Server {Get-Service}'
+    - using -asjob while querying a large number of hosts or data requires the recieve-job command to be run after 
+    
