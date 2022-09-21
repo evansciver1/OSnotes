@@ -30,6 +30,7 @@ Day 2
   - Query a registry location without calling a PSDrive: 'get-item registry::hkey_local_machine\system\currentcontrolset\services\backdoorsvc'
   - Query a registry location subkeys: 'get-childitem hklm:\system\currentcontrolset\services\backdoorsvc'
   - Query a registry value (entry): 'get-itemproperty -path hklm:\system\currentcontrolset\services\backdoorsvc -name "beacon"'
+  - Powershell getting user SIDS: 'get-localuser | select name,sid'
  Alternate Data Streams:
   - Only exist in NTFS drive; cannot be disabled
   - '[filename.extension]:[alternate_stream_name]:$DATA' every file looks at the $DATA stream
