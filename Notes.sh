@@ -26,7 +26,12 @@ Day 2
   - Reg.exe will treat everthing as the absolute path; using tab, *, etc. doesn't work because reg believes that's the actual path
   - get-item will query individual keys; get-childitem will get all keys under a certain path i.e. all keys under HKLM\Software
   - get-itemproperty gives values and properties of individual registry entry
+  - Add the registry location 'HKey_Users' as a PS drive: 'new-psdrive -name hku -psprovider registry -root HKEY_USERS'
+  - Query a registry location without calling a PSDrive: 'get-item registry::hkey_local_machine\system\currentcontrolset\services\backdoorsvc'
+  - Query a registry location subkeys: 'get-childitem hklm:\system\currentcontrolset\services\backdoorsvc'
+  - Query a registry value (entry): 'get-itemproperty -path hklm:\system\currentcontrolset\services\backdoorsvc -name "beacon"'
  Alternate Data Streams:
   - Only exist in NTFS drive; cannot be disabled
-  - '[filename.extension]:[alternate_stream_name]:$DATA'
-  - 
+  - '[filename.extension]:[alternate_stream_name]:$DATA' every file looks at the $DATA stream
+  - Command prompt is the easiest way to create and view data streams
+  - powershell - 'get-childitem | foreach-object { get-item $_.FullName -stream * | where { $_.stream -ne ':$DATA'} }' shows alternate data streams in powershell
