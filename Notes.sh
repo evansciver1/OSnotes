@@ -40,4 +40,29 @@ Day 2
 Day 3
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
   Linux Essentials:
-    - ''
+    File System:
+      - Everything falls under Root - /etc /bin /sbin /sys /dev /boot etc.
+      - /bin: configurable binaries
+      - /etc: everything thats configurable 
+      - /sys: system files
+      - /sbin: system binaries
+      - /var: variable data files - system logs, etc.
+      - /home: users home folders
+      - /proc: pseudo file system designed to hold info related to processes running on the system as long as the system is running
+      - /dev: IO devices - CAC reader, mouse, keyboard, monitor, etc.
+      - /usr: universal system resources - where files meant to be used across the entire system are held i.e. man pages
+      - /boot: anything that runs on startup - grub config, grub, etc.
+      - /lib & /lib64: static object files; similar to .dll files in windows
+      - /mnt: permenantly mounted file systems - network drives, usb harddrive, etc.
+      - /media: removable media - CDs, USBs, etc.
+      - /tmp: temporary files - everyone can write to /tmp
+      - /run: information about the system pertaining to the particular session of the computer running
+      - /root: home directory for root
+      - /opt: placeholder for user installed software
+      - /srv: files for services the system is running
+    Commands:
+      - 'which' finds the location of commands
+      - 'whereis' like which but better
+      - 'id' user, what group the user is in
+      - 'whoami' who the user youre acting as is
+      - ''
