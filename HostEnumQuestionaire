@@ -1,0 +1,13 @@
+Where am I? - Hostname
+Who am I - whoami, id
+WHo else is on here? - w, who
+What am I allowed to do? - sudo -l
+What's going on? (parts, processes, IPs, neighbors, OS/kernel ver., architecture) process validity: ip -a/ifconfig, ip n/arp, ip r/iproute, 
+(sudo) ss -ntlp/netstat, uname -a, cat /etc/os-release
+Why is that happening? - process validity
+How is that happening? - process validity
+What's in there? - ls, cat, pwd, tail, etc. 
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+Help pages
+man -k [command]
+apropos [command]
