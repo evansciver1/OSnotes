@@ -36,3 +36,8 @@ Day 2
   - '[filename.extension]:[alternate_stream_name]:$DATA' every file looks at the $DATA stream
   - Command prompt is the easiest way to create and view data streams
   - powershell - 'get-childitem | foreach-object { get-item $_.FullName -stream * | where { $_.stream -ne ':$DATA'} }' shows alternate data streams in powershell
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Day 3
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  Linux Essentials:
+    - ''
