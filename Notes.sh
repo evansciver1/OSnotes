@@ -71,3 +71,56 @@ Day 4
   Windows Boot Process:
     - BCDEDIT
     -
+ -------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Day 5
+ -------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  Linux Boot Process:
+    - Big Mike Got Killed In Russia - BIOS, MBR, GRUB, Kernel, Init, RunLevels
+    - 'lsblk' - shows devices currently being used
+    - 'sudo xxd -l 512 -g 1 /dev/sda' - checks tthe contents of the MBR
+    - 'sudo dd if=[MBR location - SDA or VDA) of=(New Copy of MBR) bs=1 count=512'
+    - 'cat /boot/grub/grub.cfg'
+    - 'ls -l /sbin/init' determines which init system youre using
+    BIOS:
+      - Performs POST
+      - First program to run on startup
+      - Performs system integrity checks
+      - Builds a device tree
+    MBR:
+      - Located at the very beginning of the bootable dist (512 bytes) and contains the primary bootloader, partition table, and MBR validity check
+      - Contains code for GRUB
+      - Typically located at /dev/hda, /dev/sda, or /dev/vda
+      - 'du' - disk usage
+      - 'df' - disk free
+    GRUB:
+      - Dynamically configurable with the capability to make changes during boot
+      - Config file - '/boot/grub/menu.lst' or '/boot/grub/grub.cfg'
+      - Altering boot entries, selecting different kernels, and modifying the initial RAM disk
+      - 'linux /boot/vmlinuz-4.15.0-76-generic root=LABEL=cloudmg-rootfs ro console=tty1 console=ttyS0' command that loads the kernel
+      - 'service <service name> start | stop | restart | status | reload | ...' script that runs services
+      - 'service --status-all'
+    Kernel:
+      - Uncompresses itself into RAM
+      - Establishes memory management and detects CPU type
+      - mounts the root '/' filesystem
+      - Kernel is process 0 [kthreadd]
+      - Executes /sbin/init or systemd daemon
+    Init:
+      - Configures environment for the system
+      - Looks at the /etc/inittab
+        System5:
+          - Available run levels 0 - 6
+          - Identifies the default init run level from /etc/inittab and uses that to load all the appropriate programs
+          - '/etc/inittab' showss different run levels
+          - '/etc/init.d' where scripts are stored
+        SystemD:
+          - Loads system in parallel and from binaries
+          - 'default.target' is the default runlevel
+          - use 'systemctl' to get default
+          - 'ls -lisa /lib/systemd/system/default.target' symbolic link to default target
+          - '/etc/systemd/system' possible file location for systemd files
+          - '/lib/systemd/system' possible file location for systemd files
+          - 'systemctl list-dependencies graphical.target' lists running dependent services by the default thing
+          - 'systemtcl cat graphical.target' shows info for default target
+    RunLevels:
+      - 
