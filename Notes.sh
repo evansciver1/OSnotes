@@ -81,6 +81,8 @@ Day 4
     - 'sudo dd if=[MBR location - SDA or VDA) of=(New Copy of MBR) bs=1 count=512'
     - 'cat /boot/grub/grub.cfg'
     - 'ls -l /sbin/init' determines which init system youre using
+    - 'cat /etc/environment' shows environmental variables - usually shows the path statement
+    - /etc/profile sets environment whenever someone logs in41
     BIOS:
       - Performs POST
       - First program to run on startup
@@ -113,6 +115,7 @@ Day 4
           - Identifies the default init run level from /etc/inittab and uses that to load all the appropriate programs
           - '/etc/inittab' showss different run levels
           - '/etc/init.d' where scripts are stored
+          - 'ls -l /etc/rc<1-6>.d'
         SystemD:
           - Loads system in parallel and from binaries
           - 'default.target' is the default runlevel
@@ -123,4 +126,4 @@ Day 4
           - 'systemctl list-dependencies graphical.target' lists running dependent services by the default thing
           - 'systemtcl cat graphical.target' shows info for default target
     RunLevels:
-      - 
+      - Runlevel0.target - 
