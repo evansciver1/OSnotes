@@ -171,4 +171,10 @@ Day 6
       - allows you to run PS commands or scripts from one machine to another without actually using Pwsh; encrypts the session
     - Handle64.exe:
       - shows handle information
-    -
+  UAC:
+    - Registry key is located at: "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System"
+    - UAC is all GUI based
+    - Checking if Auto Elevate is True: '/strings C:\Windows\System32\*.exe -accepteula | select-string -SimpleMatch "autoelevate"'
+    - Checking if Digitally Signed: './sigcheck -m C:\Windows\System32\slui.exe -accepteula | Select-String -SimpleMatch "level"'
+    - Trusted Directory: 'C:\Windows\System32'
+    - Checking Manifest: use either strings, sigcheck, or a really long command in pwsh.
