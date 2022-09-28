@@ -71,13 +71,13 @@ Day 4
   Windows Boot Process:
     - BCDEDIT
     -
- -------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
  Day 5
- -------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
   Linux Boot Process:
     - Big Mike Got Killed In Russia - BIOS, MBR, GRUB, Kernel, Init, RunLevels
     - 'lsblk' - shows devices currently being used
-    - 'sudo xxd -l 512 -g 1 /dev/sda' - checks tthe contents of the MBR
+    - 'sudo xxd -l 512 -g 1 /dev/sda' - checks the contents of the MBR
     - 'sudo dd if=[MBR location - SDA or VDA) of=(New Copy of MBR) bs=1 count=512'
     - 'cat /boot/grub/grub.cfg'
     - 'ls -l /sbin/init' determines which init system youre using
@@ -110,7 +110,7 @@ Day 4
     Init:
       - Configures environment for the system
       - Looks at the /etc/inittab
-        System5:
+        SystemV:
           - Available run levels 0 - 6
           - Identifies the default init run level from /etc/inittab and uses that to load all the appropriate programs
           - '/etc/inittab' showss different run levels
@@ -126,4 +126,32 @@ Day 4
           - 'systemctl list-dependencies graphical.target' lists running dependent services by the default thing
           - 'systemtcl cat graphical.target' shows info for default target
     RunLevels:
-      - Runlevel0.target - 
+      
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Day 6
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  Windows Process Validity:
+    - PIDS: 0-3 kernel, 4 system, 5-1000 system processes
+    - Discovering normal, abnormal, and hidden processes and services:
+      - 'Get-Process SMSS,CSRSS,LSASS | Sort -Property Id' checks processes running in those categories and their PIDs
+      - 'Get-Process | Select Name, Id, Description | Sort -Property Id' syntax to show processes based on their PIDs showing descriptions
+      - 'get-ciminstnace win32_process | ft -wrap | more' shows system processes and handle counts
+      - 'get-wmiobject win32_process | where {$_.name -like "*[process name]*"} | select name, parentprocessid. processid, commandline | format-list' 
+        gets processes and listed information and puts it in a list; can be used to find parent processes
+      - Seeing a System instance with a pipe (i.e. System | petnya) is bad!
+      - 'get-ciminstnace win32_process | select name parentprocessid, processid, commandline' shows ciminstance filtered on the parent process, 
+        PID and command line (shows last command run) members
+      - 'Get-Process | Select Name, Priorityclass' shows processes by level of priority
+      - 'sc.exe showsid [service]' shows SIDs for services using sc
+      - 'get-service | select displayname,servicename' shows display and service names
+      - 'get-wmiobject win32_service | select name, displayname, processid | fl' shows all services and the process ID theyre running under
+      - 'Tasklist /m' shows hidden processes
+      - 'schtasks /query /tn ["\task name"] /v /fo list' shows detailed info about scheduled tasks
+      - 'get-scheduledtask -taskpath \ ' shows tasks running from root director 
+      - 'Get-ScheduledTask | Select * | Select -First 5' gets the first 5 scheduled tasks and shows specific information including 
+         creation date and who created them
+      - 'sc.exe query state-all' [powershell] queries scheduled processes
+      - 'get-wmiobject win32_process | where {$_.processid -like "*[PID youre looking for]*"} | select name, parentprocessid. processid, commandline | 
+        format-list' searches for a specific PID; useful for reverse searching parent processes after finding an unusual running process
+      - ''
+    - Discovering 
