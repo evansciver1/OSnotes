@@ -153,5 +153,22 @@ Day 6
       - 'sc.exe query state-all' [powershell] queries scheduled processes
       - 'get-wmiobject win32_process | where {$_.processid -like "*[PID youre looking for]*"} | select name, parentprocessid. processid, commandline | 
         format-list' searches for a specific PID; useful for reverse searching parent processes after finding an unusual running process
-      - ''
-    - Discovering 
+      - Task Scheduler will show scheduled tasks in a GUI format; stay at the root level!
+  Sysinternals:
+    - Downloading Sysinternals: 
+      - Open Powershell
+      - 'net use * http://live.sysinternals.com' -or- 'new-psdrive -name "sysint" -psprovider filesystem -root "\\live.sysinternals.com\tools'
+    - Procmon.exe: 
+      - enable boot loggin by going to options and clicking generate thread profiling events
+    - Autoruns64.exe:
+      - shows everything that runs on startup
+      - shows scheduled tasks - clicking on a suspicious task will show its path and what its doing
+    - Procexp64.exe:
+      - gives a hierarchical view of your processes - like task manager on crack
+    - TCPView64.exe:
+      - shows local ports and connections on them
+    - PsExec64.exe:
+      - allows you to run PS commands or scripts from one machine to another without actually using Pwsh; encrypts the session
+    - Handle64.exe:
+      - shows handle information
+    -
