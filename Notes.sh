@@ -178,3 +178,18 @@ Day 6
     - Checking if Digitally Signed: './sigcheck -m C:\Windows\System32\slui.exe -accepteula | Select-String -SimpleMatch "level"'
     - Trusted Directory: 'C:\Windows\System32'
     - Checking Manifest: use either strings, sigcheck, or a really long command in pwsh.
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Day 7
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  Linux Boot Process:
+    - Startup Processes:
+      - For kernel-space processes: '[kthread] ( PID = 2 )' no non-kernel processes should have a parent PID of 2
+      - For user-space processes: '/sbin/init ( PID = 1 )'
+      - All kernel processes are forked from [kthread]; all user processes are forked from /sbin/init
+      - 'ps -elf' shows running processes
+      - 'ps -lf --ppid [1/2 depending on what processes youre looking for] --forest' slims down processes list to filter by parent ID 
+        and shows a comprehensive geneology of procceses. Use grep to find a specific process by PID and add '--context [number]' to determine how many
+        lines before/after are shown. '-B' only shows number of lines before, '-A' shows number of lines after
+      - 'Top' shows a changing list of processes that are starting and stopping. 'Htop' shows a similar list with more detail. Going to options (f2) will
+        allow you to add columns for more detail. 'Btop' needs to be installed, and shows a very detailed list of processes and a bunch of other shit
+      - ''
