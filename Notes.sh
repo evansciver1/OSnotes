@@ -181,7 +181,7 @@ Day 6
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Day 7
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  Linux Boot Process:
+  Linux Processes:
     - Startup Processes:
       - For kernel-space processes: '[kthread] ( PID = 2 )' no non-kernel processes should have a parent PID of 2
       - For user-space processes: '/sbin/init ( PID = 1 )'
@@ -191,5 +191,44 @@ Day 7
         and shows a comprehensive geneology of procceses. Use grep to find a specific process by PID and add '--context [number]' to determine how many
         lines before/after are shown. '-B' only shows number of lines before, '-A' shows number of lines after
       - 'Top' shows a changing list of processes that are starting and stopping. 'Htop' shows a similar list with more detail. Going to options (f2) will
-        allow you to add columns for more detail. 'Btop' needs to be installed, and shows a very detailed list of processes and a bunch of other shit
-      - ''
+        allow you to add columns for more detail. The 'S' column changes from 'S' to 'Z' to show zombie processes. 
+        'Btop' needs to be installed, and shows a very detailed list of processes and a bunch of other shit
+    - Process Ownership - EUID, RUID:
+      - EUID defines access rights for a process. RUID indicates who initiated a process
+    - System Calls:
+      - A system call is an interaction between a process and the kernel
+      - 'Fork()' is when the kernel creates a nearly identical copy of the process
+      - 'Exec()' is when the kernel starts a program, replacing the current process
+    - Orphan and Zombie (Defunct) Processes:
+      - Orphan processes are proceses whose parent has exited; adopted by sbin/init with PPID of 1
+      - All daemons are orphans
+      - 'Disown -a && exit' close a shell/terminal and force all children to be adopted
+      - Zombie processes are completed processes but still have an entry in the process table, waiting on parent to acknowledge or terminate
+      - Zombie cant be terminated with kill since it has already finished execution, unless the parent process that spawned it is killed
+      - Fork bombs are denial of service attacks wherein a process creates processes that spawn more processes until the computer bluescreens
+    - Daemons (services):
+      - Daemons are programs that run as a background process. Purpose is to manage/monitor a service: {status, start, restart}
+      - Daemons are services that should run for duration of system operation - since init is parent, it would require a shutdown for parent to die
+      - 'ps -ppid 1 -lf' will show malicious processes orphaned and named to look like daemons
+    - Job Control:
+      - 'jobs' displays a list of jobs running in the background. 'fg' or 'bg' sends jobs to the foreground or background
+      - 'kill %<job number>' terminates the process by job number
+      - 'ctrl -z' or 'kill -19' stops or suspends the job. 'Kill -l' shows all signal interrupts
+      - 'kill -9 <PID>' or 'pkill -9 <process name>' 
+    - Cron Jobs:
+      - Cron daemon checks the directories '/var/spool/cron' '/etc/cron.d' and '/etc/crontab' once a minute and executes any commands specified that match 
+        on the line
+        - Two types of cron jobs - system and user:
+          - System cron jobs run as root and are rigidly scheduled; perform system-wide tasks, and are controlled by '/etc/crontab' and '/etc/cron.d'
+          - User cron jobs are stored in '/var/spool/cron/crontabs/'
+          - Use 'crontab' to create user cron jobs
+          - 'crontab -u [user] file' sets users crontab file to the contents of the listed file
+          - 'crontab -l -u [user]' displays users crontab contents
+          - 'crontab -r -u [user]' removes users crontab contents
+          - 'crontab -e -u [user]' edits users crontab contents
+          - cron syntax: min - hour - day of month - month of year - day of week
+    - 'sudo lsof' lists open files filtering by a particular process, showing a breakdown of every open file by every process on the system
+    - 'sudo lsfo -p [PID]' shows all file information about the process   
+    - File descriptors 0,1,2 are stdin, stdout, and stderror respectively
+    - File perms - R = read, W = write, U = read and write
+    - 
