@@ -231,4 +231,3 @@ Day 7
     - 'sudo lsfo -p [PID]' shows all file information about the process   
     - File descriptors 0,1,2 are stdin, stdout, and stderror respectively
     - File perms - R = read, W = write, U = read and write
-    - 
