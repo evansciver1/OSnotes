@@ -235,3 +235,25 @@ Day 7
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Day 8
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  Windows Artifacts, Auditing, and Logging:
+    - Getting your user SID - 'get-wmiobject win32_useraccount | select name,sid' or 'get-localuser | select name,sid' or 
+      (cmdline) 'wmic useraccount get name,sid'
+    - UserAssist:
+      - Tracks the GUI-based programs that were run by a specific user
+      - To view .exe files run: 'Get-ItemProperty 'REGISTRY::HKEY_USERS\*\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\UserAssist\{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}\Count''
+      - To view shortcut files run: 'Get-ItemProperty 'REGISTRY::HKEY_USERS\*\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\UserAssist\{F4E57C4B-2036-45F0-A9AB-443BCFE33D9F}\Count''
+    - Windows BAM:
+      - BAM controls activictuy of background locations - the keys are loated in 'Get-Itemproperty 'HKLM:\SYSTEM\CurrentControlSet\Services\bam\UserSettings\*' (
+        Windows 1709 & 1803.' or in 'Get-Itemproperty 'HKLM:\SYSTEM\CurrentControlSet\Services\bam\state\UserSettings\*' (Windows 1809 and newer)'
+      - Or you can just run winver
+    - Recycle Bin:
+      - The recycle bin is a huge file. Check it using 'gci 'C:\$RECYCLE.BIN' -Recurse -Verbose -Force | select *' and 'gci 'C:\$RECYCLE.BIN' -Recurse -Force'
+      - Use 'get-childitem "C:\$Recycle.Bin" -force -recures | foreach-object { if (($_.name).startswith(['$R' or '$I'])) { Write-host "$_" -nonewline; 
+        write-host " --> " -foregroundcolor green -nonewline ; write-host $(get-content $_.fullname) } }' to see the names of deleted files in recycle bin
+    - Prefetch:
+      - Prefetch files are created when an application is run from a specific location for the first time. Speeds up the starting processes for applications
+      - Use 'gci -Path 'C:\Windows\Prefetch' -ErrorAction Continue | select * | select -first 5' to get
+    - Jump Lists:
+      - Jump Lists allow users to easily access items they frequently use
+      - 'gci -Recurse C:\Users\*\AppData\Roaming\Microsoft\Windows\Recent -ErrorAction Continue | select FullName, LastAccessTime' shows applications on the Jump List
+      
