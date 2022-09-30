@@ -243,13 +243,13 @@ Day 8
       - To view .exe files run: 'Get-ItemProperty 'REGISTRY::HKEY_USERS\*\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\UserAssist\{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}\Count''
       - To view shortcut files run: 'Get-ItemProperty 'REGISTRY::HKEY_USERS\*\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\UserAssist\{F4E57C4B-2036-45F0-A9AB-443BCFE33D9F}\Count''
     - Windows BAM:
-      - BAM controls activictuy of background locations - the keys are loated in 'Get-Itemproperty 'HKLM:\SYSTEM\CurrentControlSet\Services\bam\UserSettings\*' (
-        Windows 1709 & 1803.' or in 'Get-Itemproperty 'HKLM:\SYSTEM\CurrentControlSet\Services\bam\state\UserSettings\*' (Windows 1809 and newer)'
-      - Or you can just run winver
+      - BAM controls activictuy of background locations - the keys are loated in 'Get-Itemproperty 'HKLM:\SYSTEM\CurrentControlSet\Services\bam\UserSettings\*'' 
+      (Windows 1709 & 1803) or in 'Get-Itemproperty 'HKLM:\SYSTEM\CurrentControlSet\Services\bam\state\UserSettings\*' (Windows 1809 and newer)'
+      - Or you can just run winver (note: only windows 1803 and 1089 are relevant in this course)
     - Recycle Bin:
-      - The recycle bin is a huge file. Check it using 'gci 'C:\$RECYCLE.BIN' -Recurse -Verbose -Force | select *' and 'gci 'C:\$RECYCLE.BIN' -Recurse -Force'
+      - The recycle bin is a huge file. Check it using 'gci 'C:\$RECYCLE.BIN' -Recurse -Verbose -Force | select *' and 'gci 'C:\$RECYCLE.BIN' -Recurse -Force' '
       - Use 'get-childitem "C:\$Recycle.Bin" -force -recures | foreach-object { if (($_.name).startswith(['$R' or '$I'])) { Write-host "$_" -nonewline; 
-        write-host " --> " -foregroundcolor green -nonewline ; write-host $(get-content $_.fullname) } }' to see the names of deleted files in recycle bin
+        write-host " --> " -foregroundcolor green -nonewline ; write-host $(get-content $_.fullname) } }'' to see the names of deleted files in recycle bin
     - Prefetch:
       - Prefetch files are created when an application is run from a specific location for the first time. Speeds up the starting processes for applications
       - Use 'gci -Path 'C:\Windows\Prefetch' -ErrorAction Continue | select * | select -first 5' to get
@@ -262,13 +262,13 @@ Day 8
       - '[System.Text.Encoding]::Unicode.GetString((gp "REGISTRY::HKEY_USERS\*\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.txt").
         "[property number]")' will convert file hex to unicode 
       - 'Get-Item "REGISTRY::HKEY_USERS\*\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.txt" | select -Expand property | 
-        ForEach-Object { [System.Text.Encoding]::Default.GetString((Get-ItemProperty 
+        ForEach-Object { [System.Text.Encoding]::Default.GetString((Get-ItemProperty -path 
+        "REGiSTRY::hkey_users\*\software\microsoft\windows\currentversion\explorer\recentdocs\.txt' -name $_).$_)}
         -Path "REGISTRY::HKEY_USERS\*\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.txt" -Name $_).$_)}' will convert all of a users values
         from text to unicode
     - Browser Artifacts:
       - Browser artifacts store details for each user account
-      - '.\strings.exe 'C:\Users\<username>\AppData\Local\Google\Chrome\Us.\strings.exe 'C:\Users\<username>\AppData\Local\Google\Chrome\User Data\Default\
-          History' shows browser history
+      - '.\strings.exe 'C:\Users\<username>\AppData\Local\Google\Chrome\User Data\Default\History'' shows browser history
       - Use '$History = (Get-Content 'C:\users\<username>\AppData\Local\Google\Chrome\User Data\Default\History') -replace "[^a-zA-Z0-9\.\:\/]",""' or 
         '$History| Select-String -Pattern "(https|http):\/\/[a-zA-Z_0-9]+\.\w+[\.]?\w+" -AllMatches|foreach {$_.Matches.Groups[0].Value}| ft' to find
         FQDNs in Sqlite text files
@@ -276,4 +276,4 @@ Day 8
     - Using built in Windows auditing, 'auditpol /get /catgeory:*', will show the list of every category and their auditing settings
     - Windows event log:
       - View logs using event manager, or use 'eventvwr'
-      - "Get-eventlog -logname System -messeages'
+      - "Get-eventlog -logname [system/security/application/customlog] -messeages'
