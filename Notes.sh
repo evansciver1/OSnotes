@@ -256,4 +256,13 @@ Day 8
     - Jump Lists:
       - Jump Lists allow users to easily access items they frequently use
       - 'gci -Recurse C:\Users\*\AppData\Roaming\Microsoft\Windows\Recent -ErrorAction Continue | select FullName, LastAccessTime' shows applications on the Jump List
-      
+    - Recent Files:
+      - Registry key that will track the last files and folders opened. Will track the last 150 files or folders opened.
+      - gci 'REGISTRY::HKEY_USERS\*\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs' will list files in recent docs
+      - '[System.Text.Encoding]::Unicode.GetString((gp "REGISTRY::HKEY_USERS\*\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.txt").
+        "[property number]")' will convert file hex to unicode 
+      - 'Get-Item "REGISTRY::HKEY_USERS\*\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.txt" | select -Expand property | 
+        ForEach-Object { [System.Text.Encoding]::Default.GetString((Get-ItemProperty 
+        -Path "REGISTRY::HKEY_USERS\*\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.txt" -Name $_).$_)}' will convert all of a users values
+        from text to unicode
+    - Browser Artifacts:
