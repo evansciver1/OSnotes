@@ -266,3 +266,14 @@ Day 8
         -Path "REGISTRY::HKEY_USERS\*\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.txt" -Name $_).$_)}' will convert all of a users values
         from text to unicode
     - Browser Artifacts:
+      - Browser artifacts store details for each user account
+      - '.\strings.exe 'C:\Users\<username>\AppData\Local\Google\Chrome\Us.\strings.exe 'C:\Users\<username>\AppData\Local\Google\Chrome\User Data\Default\
+          History' shows browser history
+      - Use '$History = (Get-Content 'C:\users\<username>\AppData\Local\Google\Chrome\User Data\Default\History') -replace "[^a-zA-Z0-9\.\:\/]",""' or 
+        '$History| Select-String -Pattern "(https|http):\/\/[a-zA-Z_0-9]+\.\w+[\.]?\w+" -AllMatches|foreach {$_.Matches.Groups[0].Value}| ft' to find
+        FQDNs in Sqlite text files
+  Windows Auditing:
+    - Using built in Windows auditing, 'auditpol /get /catgeory:*', will show the list of every category and their auditing settings
+    - Windows event log:
+      - View logs using event manager, or use 'eventvwr'
+      - "Get-eventlog -logname System -messeages'
