@@ -264,7 +264,7 @@ Day 8
       - 'Get-Item "REGISTRY::HKEY_USERS\*\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.txt" | select -Expand property | 
         ForEach-Object { [System.Text.Encoding]::Default.GetString((Get-ItemProperty -path 
         "REGiSTRY::hkey_users\*\software\microsoft\windows\currentversion\explorer\recentdocs\.txt' -name $_).$_)}
-        -Path "REGISTRY::HKEY_USERS\*\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.txt" -Name $_).$_)}' will convert all of a users values
+        -Path '"REGISTRY::HKEY_USERS\*\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.txt" -Name $_).$_)}' will convert all of a users values
         from text to unicode
     - Browser Artifacts:
       - Browser artifacts store details for each user account
@@ -276,4 +276,28 @@ Day 8
     - Using built in Windows auditing, 'auditpol /get /catgeory:*', will show the list of every category and their auditing settings
     - Windows event log:
       - View logs using event manager, or use 'eventvwr'
-      - "Get-eventlog -logname [system/security/application/customlog] -messeages'
+      - "Get-eventlog -logname [system/security/application/customlog] -messeages"
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Day 9
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  Linux Auditing and Logging:
+    - Log Types 1 - Authentication:  
+      - /var/log/auth.log - Authentication events
+      - /var/run/utmp - currently logged-in users
+      - /var/log/wtmp - history file for /var/run/utmp
+      - /var/log/btmp - failed login attempts
+      - /var/log/syslog - default system logs 
+      - 'tail -n[how many lines you want] [log name]' to display last x amount of lines of the log
+    - Log Types 2 - Application:
+      - apache - web server (dir)
+      - apt - package manager (dir)
+      - /var/log/mysql.log -sql logs
+      - /var/log/messages - legacy catch-all
+      - /var/log/syslog - ubuntu/debian catch-all
+      - 'dmesg' - device messenger (kernel messages, shows lines from the kernel ring buffer, queries /proc/kmsg) 
+      - 'dmesg' shows last 5 lines of the kernel ring buffer
+    - Logging At a Glance:
+      - location - /var/log
+      - config file - /etc/rsyslog.conf
+      - service - /usr/sbin/rsyslogd
+      
