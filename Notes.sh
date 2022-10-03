@@ -300,4 +300,49 @@ Day 9
       - location - /var/log
       - config file - /etc/rsyslog.conf
       - service - /usr/sbin/rsyslogd
-      
+      - sudo grep -B 3 -A 3 "New Session" /var/log/auth.log
+    - Logging Daemon:
+      - /usr/sbin/rsyslogd
+      - user space daemon that reads messages written to /dev/log and formats and stores them based off of /etc/rsyslog.conf rules
+    - Config File
+      - /etc/rsyslog.conf - entries follow syslog standard facility.severity
+      - facility = what program, or part of system, the log is from
+      - severity = urgency
+    - Facility Codes:
+      - 0   kernel messages
+      - 1   user-level messages
+      - 2   mail system
+      - 3   system daemons
+      - 4   security/authorization messages
+      - 5   messages generated internally by syslogd
+      - 6   line printer subsystem
+      - 7   network news subsystem
+      - 8   UUCP subsystem
+      - 9   clock daemon
+      - 10  security/authorization messages
+      - 11  FTP daemon
+      - 12  NTP subsystem13|log audit
+      - ...TRIMMED
+    - Severity Codes
+      - 0  emerg, panic:  Emergency: system is unusable
+      - 1  alert:         Action must be taken immediately
+      - 2  crit:          Critical conditions
+      - 3  err, error:    Error conditions
+      - 4  warn, warning: Warning conditions
+      - 5  notice:        Normal but significant condition
+      - 6  info:          Informational messages
+      - 7  Debug:         Debug-level messages
+    - Log Enumeration/Management:
+      - log rotation = /etc/logrotate.conf
+    - Useful logging commands:
+      - 'tail -f' - Continuously show end of file
+      - 'less /var/log/syslog' - View Log in page viewer
+      - 'logger' - Send a user generated message to system Log i.e. Starting Update
+      - '> /var/log/messages' - Wipes Logs
+      - 'last -f /var/log{wtmp,btmp}' - Needed to view data files
+    - Auditing vs Logging:
+      - Logging is system/application defined; auditing is user defined
+      - kauditd runs at the kernel level and can monitor individual syscalls
+      - auditctl - control/config command
+      - aureport - summary reports of audit logs
+      - ausearch - query audit logs
