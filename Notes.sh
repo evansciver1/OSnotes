@@ -346,3 +346,10 @@ Day 9
       - auditctl - control/config command
       - aureport - summary reports of audit logs
       - ausearch - query audit logs
+    - SystemD log checking
+      - 'journalctl -e'
+      - 'journalctl --list-boots' shows every time the system was booted up and gives a boot id to go with it
+      - 'journalctl -b [bootid]' shows all logs from the specific boot id
+      - 'journal.ctl -u [service]' shows all logs from a specific unit (service)
+    - Splunk
+      - Splunk.com helps parse through json files
