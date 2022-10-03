@@ -353,3 +353,5 @@ Day 9
       - 'journal.ctl -u [service]' shows all logs from a specific unit (service)
     - Splunk
       - Splunk.com helps parse through json files
+    - Xpath
+      - xpath -q -e '//element/@attribute' file.xml
