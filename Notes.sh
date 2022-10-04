@@ -387,3 +387,4 @@ Day 10
       - 'get-ADuser'
       - 'get-ADGroup'
       - 'get-ADGroupMember'
+      - 'get-aduser -filter {[parameter] -like [what you want to find]}'
