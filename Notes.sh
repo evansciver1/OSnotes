@@ -378,6 +378,7 @@ Day 10
       - 'memdump -p [pid] -d [directory]' - use strings to convert to a text file, then notepad++ to read the file
       - '.\[volatility.exe path] -f .\[file] --profile=[profile of the file]' base volatility command
       - 'connections'
+      - 'connscan'
   Active Directory Enumeration:
     - Group Policy Object Queries:
       - gpresult
