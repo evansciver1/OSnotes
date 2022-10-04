@@ -385,4 +385,4 @@ Day 10
     - Powershell AD commands:
       - 'get-ADuser'
       - 'get-ADGroup'
-      - ''
+      - 'get-ADGroupMember'
