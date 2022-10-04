@@ -355,3 +355,21 @@ Day 9
       - Splunk.com helps parse through json files
     - Xpath
       - xpath -q -e '//element/@attribute' file.xml
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Day 10
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  Memory Analysis Using Volatility:
+    - Order of Volatility - The Half-Life of Data:
+      - CPU registers, cache
+      - Routing table, ARP cache, process table, kernel stats, memory
+      - Temporary file systems
+      - Disk
+      - Remote logging and monitoring data
+      - Physical configuration, network topology
+      - Archival media - backups
+    - Volatility
+      - Each OS has its own memory acquisition tool - Linpmem, Winpmem, OSXpmem
+      - Volatility 2.6 - 'https://www.volatilityfoundation.org/26'
+    - Profiles
+      - A profile is a memory layout based on the kernel of the machine on which its createdd
+      
