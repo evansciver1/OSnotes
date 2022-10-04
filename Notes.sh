@@ -367,9 +367,22 @@ Day 10
       - Remote logging and monitoring data
       - Physical configuration, network topology
       - Archival media - backups
-    - Volatility
+    - Volatility:
       - Each OS has its own memory acquisition tool - Linpmem, Winpmem, OSXpmem
       - Volatility 2.6 - 'https://www.volatilityfoundation.org/26'
     - Profiles
       - A profile is a memory layout based on the kernel of the machine on which its createdd
-      
+    - Volatility commands/plugins:
+      - 'pstree'
+      - 'procdump -p [pid] -d [directory]'
+      - 'memdump -p [pid] -d [directory]' - use strings to convert to a text file, then notepad++ to read the file
+      - '.\[volatility.exe path] -f .\[file] --profile=[profile of the file]' base volatility command
+      - 'connections'
+  Active Directory Enumeration:
+    - Group Policy Object Queries:
+      - gpresult
+      - get-gpresultantsetofpolicy
+    - Powershell AD commands:
+      - 'get-ADuser'
+      - 'get-ADGroup'
+      - ''
