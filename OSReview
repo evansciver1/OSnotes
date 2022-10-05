@@ -1,0 +1,22 @@
+Windows:
+  - installing sysinternals: net use * http://live.sysinternals.com
+  - autoruns, strings, process explorer, tcpview
+  - netstat -anob
+  - get-nettcpconnection (pwsh)
+  - get-process -id [pid] | select name, path
+  - scquery.exe (queries a service)
+  - ps-service
+  - $I = pointer to the file $R = content os the file recycle bin)
+  - ROT13 = Caesar cypher
+  - User assist uses ROT13
+  - '($profile | get-member -membertype noteproperty).name | foreach-object { if ((test-path $PROFILE.$_) -eq $true) { write-host "$PROFILE.$_" -foregroundcolor green -nonewline ; write-host "exists" }}'
+  - profile order of precidence: all users all hosts, all users current host, current user all hosts, current user current host
+Linux:
+  - sudo netstat -anop/-ltup (ltup shows active connections)
+  - systemctl status [pid] 
+  - htop
+  - crontab
+  - '/var/spool/cron' (user)
+  - '/etc/cron.d' and '/etc/crontab' (system)
+  - ps -elf --forest
+  - /etc/bash.bashrc found in /etc/profile
